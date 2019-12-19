@@ -1,0 +1,3 @@
+[submodule "AMO"]
+	path = AMO
+	url = https://github.com/smithros/AMO.git
