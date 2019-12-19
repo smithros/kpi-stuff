@@ -1,3 +1,6 @@
 [submodule "AMO"]
 	path = AMO
 	url = https://github.com/smithros/AMO.git
+[submodule "assembly-labs"]
+	path = assembly-labs
+	url = https://github.com/smithros/assembly-labs.git
