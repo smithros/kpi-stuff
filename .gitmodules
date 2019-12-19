@@ -13,3 +13,6 @@
 [submodule "AK2_Lab4"]
 	path = AK2_Lab4
 	url = https://github.com/smithros/AK2_Lab4.git
+[submodule "AK2_Lab5"]
+	path = AK2_Lab5
+	url = https://github.com/smithros/AK2_Lab5.git
