@@ -7,3 +7,6 @@
 [submodule "ParallelProgramming"]
 	path = ParallelProgramming
 	url = https://github.com/smithros/ParallelProgramming.git
+[submodule "AK2_LAB3"]
+	path = AK2_LAB3
+	url = https://github.com/smithros/AK2_LAB3.git
