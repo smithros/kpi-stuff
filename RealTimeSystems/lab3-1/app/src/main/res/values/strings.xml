@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">RTS-Lab3-1</string>
+    <string name="invalid_name">Please, enter valid number</string>
+    <string name="bigger_than">The number is too large or there is no input</string>
+    <string name="odd_number">The number must be odd, not even</string>
+</resources>
