@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="142dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="398dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginRight="144dp"
+        android:layout_marginBottom="296dp"
+        android:onClick="onButtonClick"
+        android:text="Обчислити"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/y"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="17dp"
+        android:ems="10"
+        android:hint="y"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/d" />
+
+    <EditText
+        android:id="@+id/d"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="11dp"
+        android:ems="10"
+        android:hint="d"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/y"
+        app:layout_constraintEnd_toEndOf="@+id/y"
+        app:layout_constraintStart_toStartOf="@+id/y"
+        app:layout_constraintTop_toBottomOf="@+id/c" />
+
+    <EditText
+        android:id="@+id/a"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="9dp"
+        android:ems="10"
+        android:hint="a"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/b"
+        app:layout_constraintEnd_toEndOf="@+id/b"
+        app:layout_constraintStart_toStartOf="@+id/b"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <EditText
+        android:id="@+id/b"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="12dp"
+        android:ems="10"
+        android:hint="b"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/c"
+        app:layout_constraintEnd_toEndOf="@+id/c"
+        app:layout_constraintStart_toStartOf="@+id/c"
+        app:layout_constraintTop_toBottomOf="@+id/a" />
+
+    <EditText
+        android:id="@+id/c"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="14dp"
+        android:ems="10"
+        android:hint="c"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/d"
+        app:layout_constraintEnd_toEndOf="@+id/d"
+        app:layout_constraintStart_toStartOf="@+id/d"
+        app:layout_constraintTop_toBottomOf="@+id/b" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="7dp"
+        android:text="Лабораторна робота № 3-3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
+        android:text="Коваль Ростислав ІО-71"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:text="Рівняння: ax1+bx2+cx3+dx4=y."
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="15dp"
+        android:text="Введіть параметри:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toTopOf="@+id/a"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/resTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="26dp"
+        android:text="Час"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <TextView
+        android:id="@+id/genotype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="14dp"
+        android:text="Генотип"
+        app:layout_constraintStart_toStartOf="@+id/resTime"
+        app:layout_constraintTop_toBottomOf="@+id/resTime" />
+</androidx.constraintlayout.widget.ConstraintLayout>
