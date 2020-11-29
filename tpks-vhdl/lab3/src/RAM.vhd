@@ -26,8 +26,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;	
 
-
-
 entity RAM is
 	 port(
 		 CLK : in STD_LOGIC;
@@ -35,8 +33,9 @@ entity RAM is
 		 WR : in STD_LOGIC;
 		 OE : in STD_LOGIC;
 		 AE : in STD_LOGIC;
-		 AD : in STD_LOGIC_VECTOR(9 downto 0);
-		 D : inout STD_LOGIC_VECTOR(15 downto 0)
+		 AD : in STD_LOGIC_VECTOR(12 downto 0); -- 8192 = 2 ^ 13
+		 D : in STD_LOGIC_VECTOR(15 downto 0);
+		 V : out STD_LOGIC_VECTOR(15 downto 0)
 	     );
 end RAM;
 
@@ -47,12 +46,12 @@ architecture BEH of RAM is
 	constant RAM_init: MEM1KX16 :=
 	(X"0000", others => X"0000");
 	signal do: STD_LOGIC_VECTOR(15 downto 0);
-	signal addr:STD_LOGIC_VECTOR(9 downto 0);
+	signal addr:STD_LOGIC_VECTOR(12 downto 0);
 	signal addri:integer;
 begin
 	RG_ADDR:process(CLK,R) begin
  		if R='1' then
- 			addr<="0000000000";
+ 			addr<="0000000000000";
  		elsif CLK='1' and CLK'event and AE='1' then
  			addr<= AD;
  	end if;
@@ -72,6 +71,6 @@ begin
 			end if;
 		end if;
 	end process;
-	TRI: D<= do when OE='1' else "ZZZZZZZZZZZZZZZZ";
+	TRI: V<= do when OE='1' else "ZZZZZZZZZZZZZZZZ";
 end BEH;
 
