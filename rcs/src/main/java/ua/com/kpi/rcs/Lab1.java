@@ -67,8 +67,8 @@ public class Lab1 {
         final List<Double> ps = getPs(maxDiv10, fs);
 
         printIntervals(intervalsBorders);
-        printPsFs(fs, Lab1.T1);
-        printPsFs(ps, Lab1.T2);
+        printPsFs(fs, Lab1.T1, "f");
+        printPsFs(ps, Lab1.T2, "P");
 
         double d01 = (1 - y) / (1 - ps.get(0));
         double t2 = 0 + maxDiv10 * d01;
@@ -93,9 +93,11 @@ public class Lab1 {
         ));
     }
 
-    private static void printPsFs(final List<Double> ps, final String value) {
+    private static void printPsFs(final List<Double> ps, final String value, final String pf) {
         System.out.println(value);
-        ps.forEach((val) -> System.out.println("для " + (ps.indexOf(val) + 1) + "-го інтервалу P = " + val));
+        for (int i = 0; i < ps.size(); i++) {
+            System.out.println("для " + (i+1) + "-го інтервалу " + pf + " = " + ps.get(i));
+        }
     }
 
     private static double getAverage(final List<Integer> nums) {
