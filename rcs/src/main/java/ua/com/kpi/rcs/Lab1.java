@@ -1,6 +1,7 @@
 package ua.com.kpi.rcs;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -43,10 +44,10 @@ public class Lab1 {
             time2 = scanner.nextInt();
             System.out.println("Вводити вибірку вручну?(y/n)");
             choice = scanner.next();
-            if (choice.contains("y")){
+            if (choice.contains("y")) {
                 System.out.println("Вхідна вибірка наробітків до відмови (у годинах): ");
                 while (scanner.hasNext()) {
-                   nums2.add(scanner.nextInt());
+                    nums2.add(scanner.nextInt());
                 }
             } else {
                 nums2 = nums;
@@ -70,9 +71,10 @@ public class Lab1 {
         printPsFs(fs, Lab1.T1, "f");
         printPsFs(ps, Lab1.T2, "P");
 
-        double d01 = (1 - y) / (1 - ps.get(0));
-        double t2 = 0 + maxDiv10 * d01;
-        System.out.println("d(0,1) = " + d01);
+        List<Double> qs = calcQ(y, ps, intervalsBorders);
+        double d01 = (qs.get(3) - y) / (qs.get(3) - qs.get(2));
+        System.out.println("d = " + d01);
+        double t2 = qs.get(0) + maxDiv10 * d01;
         System.out.println("T = " + t2);
 
         int index = getIndex(intervalsBorders, time);
@@ -80,9 +82,22 @@ public class Lab1 {
         System.out.println("Ймовірність безвідмовної роботи на час " + time + " годин = " + p1);
 
         int index2 = getIndex(intervalsBorders, time2);
-        double p2 = calcP(maxDiv10, intervalsBorders, fs, time, index2);
+        double p2 = calcP(maxDiv10, intervalsBorders, fs, time2, index2);
         double l = fs.get(index2) / p2;
         System.out.println("Інтенсивність відмов на час " + time2 + " годин = " + l);
+    }
+
+    private static List<Double> calcQ(double prop, final List<Double> ps, List<List<Double>> intervalsBorders) {
+        for (int i = 0; i < ps.size(); i++) {
+            if (prop > ps.get(i)) {
+                if (i == 0) {
+                    return List.of(intervalsBorders.get(0).get(0), intervalsBorders.get(0).get(1), ps.get(i), 1.0);
+                } else {
+                    return List.of(intervalsBorders.get(i).get(0), intervalsBorders.get(i).get(1), ps.get(i), ps.get(i - 1));
+                }
+            }
+        }
+        return Collections.emptyList();
     }
 
     private static void printIntervals(final List<List<Double>> intervalsBorders) {
@@ -96,7 +111,7 @@ public class Lab1 {
     private static void printPsFs(final List<Double> ps, final String value, final String pf) {
         System.out.println(value);
         for (int i = 0; i < ps.size(); i++) {
-            System.out.println("для " + (i+1) + "-го інтервалу " + pf + " = " + ps.get(i));
+            System.out.println("для " + (i + 1) + "-го інтервалу " + pf + " = " + ps.get(i));
         }
     }
 
@@ -135,10 +150,13 @@ public class Lab1 {
     }
 
     private static List<Double> getPs(final double diff, final List<Double> fs) {
-        return fs.stream()
-            .map(val -> val += val * diff)
-            .map(val -> 1 - val)
-            .collect(Collectors.toList());
+        List<Double> res = new ArrayList<>();
+        double pi = 0;
+        for (final Double f : fs) {
+            pi += f * diff;
+            res.add(1 - pi);
+        }
+        return res;
     }
 
     private static List<List<Integer>> getIntervalsNums(final List<Integer> sorted, final double diff) {
