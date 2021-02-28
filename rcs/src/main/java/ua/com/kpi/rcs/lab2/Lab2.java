@@ -21,7 +21,6 @@ public class Lab2 {
     public static final String MATRIX = "src/main/java/ua/com/kpi/rcs/lab2/matrix.txt";
 
     public static void main(String[] args) throws IOException {
-        System.out.println(10/3);
         List<List<Integer>> matrix = getMatrixInput();
         List<Double> res = getPsInput(matrix);
         final DfsPathPrinter dfsPathPrinter = new DfsPathPrinter(matrix.size());
@@ -73,8 +72,6 @@ public class Lab2 {
                     .boxed()
                     .collect(Collectors.toList())
             ));
-
-        System.out.println(dynamicMatrix);
         for (final List<Integer> matrix : dynamicMatrix) {
             for (final Integer val : matrix) {
                 if (dynamicMatrix.size() != matrix.size()) {
