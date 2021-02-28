@@ -40,7 +40,7 @@ public class DfsPathPrinter {
         final boolean[] isVisited = new boolean[this.vertices];
         final ArrayList<Integer> pathList = new ArrayList<>();
         pathList.add(source);
-        System.out.printf("All paths form %s to %d\n", source, dest);
+        System.out.printf("Всі шляхи від %s до %d:\n", source, dest);
         recursivePrint(source, dest, isVisited, pathList);
     }
 

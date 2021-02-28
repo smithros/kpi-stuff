@@ -25,13 +25,14 @@ public class Lab2 {
         List<Double> res = getPsInput(matrix);
         final DfsPathPrinter dfsPathPrinter = new DfsPathPrinter(matrix.size());
         dfsPathPrinter.printResult(matrix);
-        final List<List<Integer>> schemas = getSchemas(dfsPathPrinter.getPaths());
+        final List<List<Integer>> schemas = getPropTable(dfsPathPrinter.getPaths());
         final List<Double> probList = calcProbabilities(schemas, res);
+        System.out.println("Таблиця працездатних станів системи:");
         for (int i = 0; i < schemas.size(); i++) {
             System.out.println(schemas.get(i) + " = " + probList.get(i));
         }
         System.out.printf("Ймовірність відмови P = %s\n", getSum(probList));
-        System.out.printf("Інтинсивність відмов Lambda = %s\n", calcLambda(probList, 10));
+        System.out.printf("Інтенсивність відмов Lambda = %s\n", calcLambda(probList, 10));
         System.out.printf("Ймовірність відмови T = %s\n", 1 / calcLambda(probList, 10));
     }
 
@@ -87,24 +88,24 @@ public class Lab2 {
         return dynamicMatrix;
     }
 
-    private static List<List<Integer>> getSchemas(final List<List<Integer>> paths) {
-        List<List<Integer>> schemas = new ArrayList<>();
+    private static List<List<Integer>> getPropTable(final List<List<Integer>> paths) {
+        List<List<Integer>> rows = new ArrayList<>();
         int maxNodes = 0;
         List<Integer> allNodes = new ArrayList<>();
 
-        for (List<Integer> path : new ArrayList<>(paths)) {
+        for (final List<Integer> path : new ArrayList<>(paths)) {
             List<Integer> tmp = new ArrayList<>(path);
             tmp.remove(0);
             tmp.remove(tmp.size() - 1);
-            schemas.add(tmp);
+            rows.add(tmp);
             if (calcMax(tmp) > maxNodes) {
                 maxNodes = calcMax(tmp);
             }
         }
         IntStream.range(1, maxNodes + 1).forEach(allNodes::add);
-        schemas.add(allNodes);
-        List<List<Integer>> test = new ArrayList<>(schemas);
-        for (final List<Integer> path : schemas) {
+        rows.add(allNodes);
+        List<List<Integer>> test = new ArrayList<>(rows);
+        for (final List<Integer> path : rows) {
             List<Integer> tmp = new ArrayList<>(allNodes);
             tmp.removeAll(path);
             for (int i = 1; i < tmp.size(); i++) {
@@ -112,7 +113,7 @@ public class Lab2 {
                     List<Integer> newTmp = new ArrayList<>(path);
                     newTmp.addAll(new ArrayList<>(comb));
                     newTmp.sort(Comparator.naturalOrder());
-                    if (!schemas.contains(newTmp)) {
+                    if (!rows.contains(newTmp)) {
                         test.add(new ArrayList<>(newTmp));
                     }
                 }
@@ -123,7 +124,9 @@ public class Lab2 {
         return test.stream().distinct().collect(Collectors.toList());
     }
 
-    private static List<Double> calcProbabilities(final List<List<Integer>> schemas, List<Double> inputPs) {
+    private static List<Double> calcProbabilities(final List<List<Integer>> schemas,
+                                                  final List<Double> inputPs
+    ) {
         List<Integer> allNodes = new ArrayList<>(schemas.get(0));
         List<Double> res = new ArrayList<>();
         for (final List<Integer> schema : schemas) {
