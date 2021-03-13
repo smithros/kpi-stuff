@@ -1,18 +1,6 @@
-[submodule "AMO"]
-	path = AMO
-	url = https://github.com/smithros/AMO.git
 [submodule "assembly-labs"]
 	path = assembly-labs
 	url = https://github.com/smithros/assembly-labs.git
 [submodule "ParallelProgramming"]
 	path = ParallelProgramming
 	url = https://github.com/smithros/ParallelProgramming.git
-[submodule "AK2_LAB3"]
-	path = AK2_LAB3
-	url = https://github.com/smithros/AK2_LAB3.git
-[submodule "AK2_Lab4"]
-	path = AK2_Lab4
-	url = https://github.com/smithros/AK2_Lab4.git
-[submodule "AK2_Lab5"]
-	path = AK2_Lab5
-	url = https://github.com/smithros/AK2_Lab5.git
