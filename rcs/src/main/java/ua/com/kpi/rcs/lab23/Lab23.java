@@ -23,6 +23,7 @@ public class Lab23 {
     public static void main(String[] args) throws IOException {
         final List<List<Integer>> matrix = getMatrixInput();
         final List<Double> probs = getPsInput(matrix);
+        System.out.println("\nРезультати 3 ЛР:");
         final double lab2Res = lab2(matrix, probs);
         calcLab3(lab2Res, matrix, probs, 1, 1, 1000, "all");
         calcLab3(lab2Res, matrix, probs, 1, 1, 1000, "alone");
@@ -33,14 +34,14 @@ public class Lab23 {
         dfsPathPrinter.printResult(matrix);
         final List<List<Integer>> schemas = getPropTable(dfsPathPrinter.getPaths());
         final List<Double> probList = calcProbabilities(schemas, probs);
-        System.out.println("Таблиця працездатних станів системи:");
+/*        System.out.println("Таблиця працездатних станів системи:");
         for (int i = 0; i < schemas.size(); i++) {
             System.out.println(schemas.get(i) + " = " + probList.get(i));
-        }
+        }*/
         final double fres = getSum(probList);
-        System.out.printf("Ймовірність відмови P = %s\n", fres);
-        System.out.printf("Інтенсивність відмов Lambda = %s\n", calcLambda(probList, 10));
-        System.out.printf("Ймовірність відмови T = %s\n", 1 / calcLambda(probList, 10));
+        System.out.printf("\nЙмовірність відмови P = %s\n", fres);
+//        System.out.printf("Інтенсивність відмов Lambda = %s\n", calcLambda(probList, 10));
+//        System.out.printf("Ймовірність відмови T = %s\n", 1 / calcLambda(probList, 10));
         return fres;
     }
 
@@ -199,23 +200,21 @@ public class Lab23 {
     ) {
         final double q = 1 - p;
         final double t = getTSystem(p, time);
-        double qRes;
-        double pRes;
-        double tRes;
+        final double qRes;
+        final double pRes;
+        final double tRes;
         if ("all".equals(choice)) {
             qRes = getQReserved(k1, q);
             pRes = 1 - qRes;
         } else {
-            List<Double> p2List = calcNewProbs(probsFile, k2);
+            final List<Double> p2List = calcNewProbs(probsFile, k2);
             pRes = lab2(matrix, p2List);
             qRes = 1 - pRes;
         }
         tRes = getTSystem(pRes, time);
-        double g1_q = qRes / q;
-        double g1_p = pRes / p;
-        double g1_t = tRes / t;
-
-        System.out.println("\nРезультати 3 ЛР:");
+        final double g1_q = qRes / q;
+        final double g1_p = pRes / p;
+        final double g1_t = tRes / t;
         System.out.printf("\nP = %f", p);
         System.out.printf("\nQ = %f", q);
         System.out.printf("\nT = %f", t);
@@ -224,13 +223,11 @@ public class Lab23 {
         System.out.printf("\nT reserved system = %f", tRes);
         System.out.printf("\nG_q = %f", g1_q);
         System.out.printf("\nG_p = %f", g1_p);
-        System.out.printf("\nG_t = %f", g1_t);
+        System.out.printf("\nG_t = %f\n", g1_t);
     }
 
-    private static List<Double> calcNewProbs(final List<Double> probs,
-                                             final int range
-    ) {
-        List<Double> res = new ArrayList<>();
+    private static List<Double> calcNewProbs(final List<Double> probs, final int range) {
+        final List<Double> res = new ArrayList<>();
         for (final Double prob : probs) {
             double value;
             value = Math.pow(1 - prob, range + 1);
