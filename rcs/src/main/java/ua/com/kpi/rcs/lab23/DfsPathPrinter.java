@@ -1,4 +1,4 @@
-package ua.com.kpi.rcs.lab2;
+package ua.com.kpi.rcs.lab23;
 
 import java.util.ArrayList;
 import java.util.List;
