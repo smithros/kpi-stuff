@@ -41,7 +41,7 @@ def eng_triple_dec_test():
         for j in range(1, 200):
             for c in range(1, 200):
                 t1 = time.time()
-                encrypt_start('a' * el, 'b' * j, 'c' * c, 'z' * 200, 'eng')
+                decrypt_start('a' * el, 'b' * j, 'c' * c, 'z' * 200, 'eng')
                 t2 = time.time()
                 y.append(t2 - t1)
     return y
@@ -85,7 +85,7 @@ def ukr_triple_dec_test():
         for j in range(1, 200):
             for c in range(1, 200):
                 t1 = time.time()
-                encrypt_start('ф' * el, 'і' * j, 'й' * c, 'и' * 200, 'ukr')
+                decrypt_start('ф' * el, 'і' * j, 'й' * c, 'и' * 200, 'ukr')
                 t2 = time.time()
                 y.append(t2 - t1)
     return y

@@ -7,20 +7,20 @@ alphabet_ukr = "АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮ
 alphabet_eng = string.ascii_letters + string.digits
 
 
-def encrypt_start(key: str, key2: str, key3: str, message: str, lang: str) -> str:
+def encrypt_start(key: str, key2: str, key3: str, text: str, lang: str) -> str:
     mod = get_vars(lang)[0]
     hex_int = get_vars(lang)[2]
-    ord_message = [ord(i) for i in message]
-    enc_1 = decrypt(key, ord_message, mod)
-    enc_2 = decrypt(key2, enc_1, mod)
-    enc_3 = decrypt(key3, enc_2, mod)
+    ord_msg = [ord(i) for i in text]
+    enc_1 = encrypt(key, ord_msg, mod)
+    enc_2 = encrypt(key2, enc_1, mod)
+    enc_3 = encrypt(key3, enc_2, mod)
     result = []
     for i in enc_3:
         result.append(format(i, hex_int))
     return ''.join(result)
 
 
-def encrypt(key: str, message: str, mod: int) -> list:
+def encrypt(key: str, message, mod: int) -> list:
     ord_key = [ord(j) for j in key]
     arr = set_key(ord_key, mod)
     stream = get_stream(arr, mod)
