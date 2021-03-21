@@ -1,6 +1,3 @@
 [submodule "assembly-labs"]
 	path = assembly-labs
 	url = https://github.com/smithros/assembly-labs.git
-[submodule "ParallelProgramming"]
-	path = ParallelProgramming
-	url = https://github.com/smithros/ParallelProgramming.git
