@@ -1,0 +1,5 @@
+bus,1
+bus,1
+train,1
+bicycle,1
+plane,1
