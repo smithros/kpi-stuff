@@ -7,15 +7,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
 import java.util.Objects;
 
 public class Shuffler {
 
     public void mapOutput(final MultiValuedMap<String, Integer> data) {
-        for (final Map.Entry<String, Integer> entry : data.entries()) {
-            System.out.println(entry);
-        }
+        data.entries().forEach(System.out::println);
     }
 
     public MultiValuedMap<String, Integer> readFile(final String path) {

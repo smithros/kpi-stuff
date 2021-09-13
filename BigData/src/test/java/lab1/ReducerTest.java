@@ -5,10 +5,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ShufflerTest {
+public class ReducerTest {
 
     private MultiValuedMap<String, Integer> data;
     private Shuffler shuffler;
+    private Reducer reducer;
     private String file1;
     private String file2;
 
@@ -19,20 +20,11 @@ public class ShufflerTest {
         this.shuffler = new Shuffler();
         this.data = this.shuffler.readFile(this.file1);
         this.data.putAll(this.shuffler.readFile(this.file2));
+        this.reducer = new Reducer(this.data);
     }
 
     @Test
-    public void readFileTest() {
-        final MultiValuedMap<String, Integer> f1 = this.shuffler.readFile(this.file1);
-        final MultiValuedMap<String, Integer> f2 = this.shuffler.readFile(this.file2);
-
-        Assert.assertEquals(5, f1.size());
-        Assert.assertEquals(5, f2.size());
-    }
-
-    @Test
-    public void shuffleTest() {
-        this.shuffler.mapOutput(this.data);
-        Assert.assertNotEquals(5, this.data.entries().size());
+    public void reduceTest() {
+        Assert.assertEquals(5, this.reducer.reduce().size());
     }
 }
