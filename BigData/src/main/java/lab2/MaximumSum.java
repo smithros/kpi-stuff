@@ -92,7 +92,7 @@ public class MaximumSum {
         final Configuration conf = new Configuration();
         final String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
         if (otherArgs.length != 3) {
-            System.err.println("Usage: AverageCount <hdfs://> <in> <out>");
+            System.err.println("Usage: MaximumSum <hdfs://> <in> <out>");
             System.exit(2);
         }
         final FileSystem hdfs = FileSystem.get(new URI(args[0]), conf);
