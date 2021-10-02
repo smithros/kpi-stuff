@@ -5,12 +5,12 @@
 <br>
 
 ### About:
-In this repository you can find some works, I made during studying in the university from 2017 to 2021. <br/>
+In this repository you can find some works, I made during studying in the university from 2017 to 2023. <br/>
 
 I was done in National Technical University of Ukraine “Igor Sikorsky Kyiv Polytechnic Institute” <br/>
-Speciality: 123 - Computer Engineering.
+Speciality: 123 - Computer Engineering. Bachelor's and Master's degrees.
 
-All works variants are 7 or 8, but there is a chance that these tasks are not actual now.<br>
+All works variants are 7 or 8 for bachelor and 5 for masters, but there is a chance that these tasks are not actual now.<br>
 
 I do not guarantee that they all work correctly, but it was enough to get a satisfying mark (B and A grades in ECTS system). </br>
 So I hope it could be useful for you. </br>
@@ -23,3 +23,6 @@ To clone the repo for using these materials simply do the following: </br>
 
 ### Contact me:
 If you have some questions please DM [me](mailto:kovalr2000@gmail.com).
+
+### Note 
+A lot of code here could be written better, but there was no time for this :) 
