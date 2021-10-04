@@ -19,7 +19,7 @@ public class Parser {
     private final List<String> types;
     private final List<String> lexicalErrors;
     private final List<String> syntaxErrors;
-    private static String valToWrite = "";
+    private static StringBuilder valToWrite = new StringBuilder();
 
     public Parser() {
         this.tokens = new ArrayList<>();
@@ -43,46 +43,46 @@ public class Parser {
                                 && expr.charAt(charIndex) != '.'
                         )
                 ) {
-                    valToWrite += expr.charAt(charIndex);
+                    valToWrite.append(expr.charAt(charIndex));
                     charIndex++;
                 }
-                tokens.add(valToWrite);
+                tokens.add(String.valueOf(valToWrite));
                 types.add("Var");
-                valToWrite = "";
+                valToWrite = new StringBuilder();
             } else if (this.has(tokenNums, expr.charAt(charIndex))) {
                 while (
                         charIndex < expr.length()
                                 && this.has(tokenNums, expr.charAt(charIndex))
                 ) {
-                    valToWrite += expr.charAt(charIndex);
+                    valToWrite.append(expr.charAt(charIndex));
                     charIndex++;
                 }
-                tokens.add(valToWrite);
+                tokens.add(String.valueOf(valToWrite));
                 types.add("Num");
-                valToWrite = "";
+                valToWrite = new StringBuilder();
             } else if (this.has(tokenOperations, expr.charAt(charIndex))) {
-                valToWrite += expr.charAt(charIndex);
+                valToWrite.append(expr.charAt(charIndex));
                 charIndex++;
-                if (valToWrite.equals("=")) {
+                if (String.valueOf(valToWrite).equals("=")) {
                     equalitySignsCnt++;
                 }
-                tokens.add(valToWrite);
+                tokens.add(String.valueOf(valToWrite));
                 types.add("Op");
-                valToWrite = "";
+                valToWrite = new StringBuilder();
             } else if (this.has(tokenOpenBrace, expr.charAt(charIndex))) {
-                valToWrite += expr.charAt(charIndex);
+                valToWrite.append(expr.charAt(charIndex));
                 charIndex++;
-                tokens.add(valToWrite);
+                tokens.add(String.valueOf(valToWrite));
                 types.add("(");
                 openBracesCnt++;
-                valToWrite = "";
+                valToWrite = new StringBuilder();
             } else if (this.has(tokenCloseBrace, expr.charAt(charIndex))) {
-                valToWrite += expr.charAt(charIndex);
+                valToWrite.append(expr.charAt(charIndex));
                 charIndex++;
-                tokens.add(valToWrite);
+                tokens.add(String.valueOf(valToWrite));
                 types.add(")");
                 closeBracesCnt++;
-                valToWrite = "";
+                valToWrite = new StringBuilder();
                 if (closeBracesCnt > openBracesCnt) {
                     syntaxErrors.add("Error at index " + (charIndex - 1) + ": Not equal amount of open (" + openBracesCnt + ") and closed (" + closeBracesCnt + ") braces");
                 }
@@ -109,7 +109,7 @@ public class Parser {
         int tokenTypeIndex = 0;
         int dotCnt = 0;
         String error;
-        String buf = "";
+        StringBuilder buf = new StringBuilder();
         //Beginning with (, number, variable or ending with ), number, variable
         if (!types.get(0).equals("Num") && !types.get(0).equals("Var") && !types.get(0).equals("(")) {
             syntaxErrors.add("id0: Expression can not start with symbol [" + tokens.get(0) + "]");
@@ -174,7 +174,7 @@ public class Parser {
         tokenTypeIndex = 0;
         while (tokenTypeIndex < tokens.size()) {
             if (types.get(tokenTypeIndex).equals("Num") || types.get(tokenTypeIndex).equals("Var")) {
-                buf += tokens.get(tokenTypeIndex);
+                buf.append(tokens.get(tokenTypeIndex));
                 int sbuf = (tokens.get(tokenTypeIndex).length());
                 int j;
                 for (j = 0; j < (tokens.get(tokenTypeIndex).length()); j++) {
@@ -198,9 +198,9 @@ public class Parser {
             }
             tokenTypeIndex++;
             dotCnt = 0;
-            buf = "";
+            buf = new StringBuilder();
         }
-        if (syntaxErrors.size() == 0 && lexicalErrors.size() == 0) {
+        if (this.syntaxErrors.size() == 0 && this.lexicalErrors.size() == 0) {
             System.out.println("Expression is correct");
         } else {
             System.out.println("Expression is NOT correct");
@@ -241,5 +241,9 @@ public class Parser {
 
     public List<String> getSyntaxErrors() {
         return this.syntaxErrors;
+    }
+
+    public boolean hasErrors() {
+        return this.getLexicalErrors().size() != 0 || this.getSyntaxErrors().size() != 0;
     }
 }
