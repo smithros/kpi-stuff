@@ -48,14 +48,16 @@ public class MaximumSum {
 
         @Override
         public String toString() {
-            return String.format("maxVal=%s", maxVal);
+            return String.format("maxVal=%s", this.maxVal);
         }
     }
 
     public static class MaxSumMapper extends Mapper<Object, Text, Text, MaxSum> {
 
         @Override
-        public void map(final Object key, final Text value, final Context context) throws IOException, InterruptedException {
+        public void map(final Object key, final Text value, final Context context)
+                throws IOException, InterruptedException
+        {
             final String csvLine = value.toString();
             final String[] csvField = csvLine.split(",");
             if (csvField[0].contains(".07.")) {
@@ -79,7 +81,9 @@ public class MaximumSum {
     public static class MaxSumReducer extends Reducer<Text, MaxSum, Text, MaxSum> {
 
         @Override
-        public void reduce(Text key, Iterable<MaxSum> values, Context context) throws IOException, InterruptedException {
+        public void reduce(Text key, Iterable<MaxSum> values, Context context)
+                throws IOException, InterruptedException
+        {
             double sum = 0;
             for (MaxSum val : values) {
                 sum += val.getMaxVal();
