@@ -31,7 +31,8 @@ public class Lab1 {
                 while (i < system.length && j < system.length) {
                     // connection between clusters
                     system[i][j] = 1;
-                    system[i][j + 3] = 1;
+                    system[i+1][j+1] = 1;
+                    system[i+2][j+2] = 1;
                     i += 9;
                     j += 9;
                 }
