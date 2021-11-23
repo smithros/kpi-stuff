@@ -1,0 +1,72 @@
+<workflow-app xmlns="uri:oozie:workflow:0.1" name="koval_5">
+
+  <start to="jar-mapreduce"/>
+
+  <action name="jar-mapreduce">
+    <java>
+      <job-tracker>${jobTracker}</job-tracker>
+      <name-node>${nameNode}</name-node>
+      <configuration>
+        <property>
+          <name>oozie.launcher.mapreduce.map.memory.mb</name>
+          <value>1024</value>
+        </property>
+        <property>
+          <name>oozie.launcher.mapreduce.reduce.memory.mb</name>
+          <value>1024</value>
+        </property>
+        <property>
+          <name>oozie.launcher.yarn.app.mapreduce.am.resource.mb</name>
+          <value>1024</value>
+        </property>	  
+      </configuration>
+      <main-class>lab2.MaximumSum</main-class>
+      <arg>${nameNode}</arg>
+      <arg>${mapredInput}</arg>
+      <arg>${mapredOutput}/mapred_java</arg>
+      
+    </java>
+	
+    <ok to="pig"/>
+    <error to="mp_err"/>
+  
+  </action>
+
+  <action name="pig">
+     <pig>
+       <job-tracker>${jobTracker}</job-tracker>
+       <name-node>${nameNode}</name-node>
+   
+       <script>lab3.pig</script>
+    </pig>	
+	
+    <ok to="hive"/>
+    <error to="pig_err"/>
+ 
+ </action>
+
+  <action name="hive">
+     <hive xmlns="uri:oozie:hive-action:0.2">
+       <job-tracker>${jobTracker}</job-tracker>
+       <name-node>${nameNode}</name-node>
+       <job-xml>${hiveSite}</job-xml>
+       <script>lab4.hql</script>
+    </hive>	
+    
+	<ok to="end"/>
+    <error to="hive_err"/>
+ 
+ </action>
+ 
+	<kill name="mp_err">
+		<message>MapReduce error occurred</message>
+	</kill>
+	<kill name="pig_err">
+		<message>Pig error occurred</message>
+	</kill>
+	<kill name="hive_err">
+		<message>Hive error occurred</message>
+	</kill>
+  <end name="end"/>
+
+</workflow-app>
